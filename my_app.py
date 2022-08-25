@@ -25,23 +25,19 @@ class StudentBase(BaseModel):
 	grado_universitario: Grade_Univ = Field(...)
 	hobby: str = Field(default = None, max_length=30)	
 	
-	class Config:								
-		schema_extra = {
+
+class Student(StudentBase):
+    edad: int = Field(..., gt=17)
+    email: EmailStr = Field(...)
+    calificacion_ingreso: float = Field(..., gt=60.00, le= 100.00)
+    class Config: 
+        schema_extra = {
                 "example" : {
                     "student_id": 666,	
 				    "apellido_paterno": "Roca", 
 				    "apellido_materno": "Dono", 
 				    "nombres": "Carlos", 
-                    "grado_universitario": "tercer grado"
-                    }
-			    }
-class Student(StudentBase):
-    edad: int = Field(..., gt=17)
-    email: EmailStr = Field(..., max_length=50)
-    calificacion_ingreso: float = Field(..., gt=60.00, le= 100.00)
-    class Config: 
-        schema_extra = {
-                "example" : {
+                    "grado_universitario": "tercer grado",
                     "edad": 21,
                     "calificacion_ingreso": 97.55, 
                     "email": "roca@gmail.com"
